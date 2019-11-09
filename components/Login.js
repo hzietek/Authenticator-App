@@ -10,8 +10,8 @@ function LoginError(props) {
     }
 }
 class Login extends Component {
-    constructor(prop) {
-        super(prop);
+    constructor(props) {
+        super(props);
 
         this.state = {
             email: '',

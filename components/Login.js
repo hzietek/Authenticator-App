@@ -34,7 +34,7 @@ class Login extends Component {
     Authentication() {
         axios.get(`http://localhost:3001/api/users`).then(res => {
             if (this.state.email === res.data[0].email && this.state.password === res.data[0].password) {
-                Router.push('/home');
+                Router.push('/profile');
             } else {
                 this.setState({loginError: true});
             }

@@ -1,7 +1,7 @@
 import React from 'react'
 import Login from '../components/Login'
 
-const Home = () => (
+const Index = () => (
   <div>
   <Login></Login>
   <style jsx>
@@ -10,4 +10,4 @@ const Home = () => (
   </div>
 )
 
-export default Home
+export default Index

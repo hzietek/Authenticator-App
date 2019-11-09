@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Home = () => (
+const Profile = () => (
     <div>
         <h1>You logged in!</h1>
         <style jsx>
@@ -9,4 +9,4 @@ const Home = () => (
     </div>
 )
 
-export default Home
+export default Profile

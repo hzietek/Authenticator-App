@@ -29,7 +29,7 @@ class Register extends Component {
     }
 
     register() {
-        
+        axios.post('http://localhost:3001/registeruser', `name=${this.state.name}&email=${this.state.email}&password=${this.state.password}`);
     }
 
     render() {
@@ -40,7 +40,7 @@ class Register extends Component {
                         <input value={this.state.name} className="form-element" type="text" name="name" onChange={this.handleName}></input>
                         <input value={this.state.email} className="form-element" type="text" name="email" onChange={this.handleEmail}></input>
                         <input value={this.state.password} className="form-element" type="password" name="password" onChange={this.handlePassword}></input>
-                        <a className="form-submit">REGISTER</a>
+                        <a className="form-submit" onClick={this.register}>REGISTER</a>
                     </form>
                 </div>
                 <style jsx>

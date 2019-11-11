@@ -4,7 +4,7 @@ import Router from 'next/router';
 
 function LoginError(props) {
     if (props.loginError) {
-        return <h2>Wrong credentials!</h2>
+        return <h2 className='error'>Wrong credentials!</h2>
     } else {
         return (null);
     }
@@ -32,12 +32,16 @@ class Login extends Component {
     } 
 
     Authentication() {
-        axios.get(`http://localhost:3001/api/users`).then(res => {
-            if (this.state.email === res.data[0].email && this.state.password === res.data[0].password) {
-                Router.push('/profile');
-            } else {
-                this.setState({loginError: true});
-            }
+        axios.get(`http://localhost:3001/getusers`).then(res => {
+            const users = res.data;
+            users.forEach(element => {
+                if (this.state.email === element.email && this.state.password === element.password) {
+                    Router.push('/profile');
+                } else {
+                    this.setState({loginError: true});
+                }
+            }); 
+            
         }).catch(error => {
             console.log(error);
         });
@@ -77,6 +81,9 @@ class Login extends Component {
                         text-align: center;
                         border: 1px solid black;
                         background-color: yellow;
+                    }
+                    .error {
+                        color: red;
                     }
                 `
                 }

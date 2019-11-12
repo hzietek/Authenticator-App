@@ -12,8 +12,11 @@ html, body, #__next {
 
 .title {
   width: 50%;
-  padding-top: 50px;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
   h1 {
     color: #DFBF84;
     font-family: 'Righteous', cursive; 
@@ -125,4 +128,12 @@ html, body, #__next {
 .register-accept {
   letter-spacing: 0.1em;
   color: #2D9A2D;
+}
+
+.auth-image {
+  background-repeat:no-repeat;
+  background-size:contain;
+  height:200px;
+  width:200px;
+  background-image: url("./img/auth.png");
 }

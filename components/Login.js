@@ -39,12 +39,13 @@ class Login extends Component {
                     Router.push('/profile');
                 } else {
                     this.setState({loginError: true});
-                    this.setState({password: ""});
+                    //fix here because it shouldnt be here, too fast error
                 }
             }); 
-            
+            this.setState({password: ""});
         }).catch(error => {
             console.log(error);
+            this.setState({password: ""});
         });
     }
 

@@ -3,9 +3,7 @@ import axios from 'axios';
 import Router from 'next/router';
 
 function RegisterAccept(props) {
-    console.log("szajka" , props.registerAccept);
     if (props.registerAccept) {
-        console.log(props.registerAccept);
         return <h2 className='register-accept'>YOU ARE REGISTERED NOW!</h2>
     } else {
         return (null);
@@ -42,7 +40,7 @@ class Register extends Component {
 
     register() {
         axios.post('http://localhost:3001/registeruser', `name=${this.state.name}&email=${this.state.email}&password=${this.state.password}`)
-        .then(response => {this.setState({registerAccept: true}); console.log("mieszajka", this.state.registerAccept)}).then(error => {console.log(error)});
+        .then(response => {this.setState({registerAccept: true})}).then(error => {console.log(error)});
         this.setState({name: ""});
         this.setState({email: ""});
         this.setState({password: ""});

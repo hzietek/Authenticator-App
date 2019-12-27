@@ -4,14 +4,14 @@ import Router from 'next/router';
 
 function LoginError(props) {
     if (props.loginError) {
-        return <h2>Wrong credentials!</h2>
+        return <h2 className='error'>WRONG CREDENTIALS!</h2>
     } else {
         return (null);
     }
 }
 class Login extends Component {
-    constructor(prop) {
-        super(prop);
+    constructor(props) {
+        super(props);
 
         this.state = {
             email: '',
@@ -32,14 +32,20 @@ class Login extends Component {
     } 
 
     Authentication() {
-        axios.get(`http://localhost:3001/api/users`).then(res => {
-            if (this.state.email === res.data[0].email && this.state.password === res.data[0].password) {
-                Router.push('/home');
-            } else {
-                this.setState({loginError: true});
-            }
+        axios.get(`http://localhost:3001/getusers`).then(res => {
+            const users = res.data;
+            users.forEach(element => {
+                if (this.state.email === element.email && this.state.password === element.password) {
+                    Router.push('/profile');
+                } else {
+                    this.setState({loginError: true});
+                    //fix here because it shouldnt be here, too fast error
+                }
+            }); 
+            this.setState({password: ""});
         }).catch(error => {
             console.log(error);
+            this.setState({password: ""});
         });
     }
 
@@ -49,38 +55,15 @@ class Login extends Component {
         return (
             <div>
                 <div className="form-container">
+                    
                     <form className="form">
+                        <h1 className="form-title">SIGN IN</h1>
                         <LoginError loginError = {this.state.loginError} />
-                        <input name="email" type="text" value={this.state.email} className="form-element" onChange={this.handleEmail}></input>
-                        <input name="password" type="password" value={this.state.password} className="form-element" onChange={this.handlePassword}></input>
-                        <a name="submit" className="form-submit" onClick={this.Authentication}>SUBMIT</a>
+                        <input name="email" type="text" value={this.state.email} className="form-element" placeholder="EMAIL" onChange={this.handleEmail}></input>
+                        <input name="password" type="password" value={this.state.password} className="form-element" placeholder="PASSWORD" onChange={this.handlePassword}></input>
+                        <a name="submit" className="form-submit login" onClick={this.Authentication}>SUBMIT</a>
                     </form>
                 </div>
-                <style jsx>
-                {`
-                    .form-container {
-                        display: flex;
-                        justify-content: center;
-                    }
-                    .form {
-                        display: flex;
-                        flex-direction: column;
-                    }
-                    .form-element {
-                        margin-bottom: 20px;
-                        height: 20px;
-                        width: 200px;
-                        color: red;
-                    }
-                    .form-submit {
-                        cursor: pointer;
-                        text-align: center;
-                        border: 1px solid black;
-                        background-color: yellow;
-                    }
-                `
-                }
-                </style>
             </div>
         )
     }

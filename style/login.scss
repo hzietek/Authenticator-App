@@ -1,0 +1,139 @@
+//FONTS
+@import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Righteous&display=swap');
+
+//COLORS
+$white: #FFFFFF;
+
+html, body, #__next {
+  margin: 0;
+  height: 100%;
+}
+
+.title {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  h1 {
+    color: #DFBF84;
+    font-family: 'Righteous', cursive; 
+    font-size: 65px; font-weight: normal; 
+    line-height: 60px;
+    text-transform: uppercase; 
+    text-shadow: 2px 2px 0 #000; 
+    text-align: center;
+  }
+}
+
+.form-title {
+  font-family: 'Righteous', cursive;
+  font-size: 30px; 
+  letter-spacing: 0.2em; 
+  color: #DFBF84; 
+  text-transform: uppercase; 
+  text-shadow: 1px 1px 0 #000;
+  text-align: center; 
+}
+
+.container {
+  margin: 0;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  background-color: #BF4342;
+}
+
+.form {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  width: 100%;
+}
+
+//LOGIN
+.login-container {
+  font-family: 'Raleway', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 50%;
+  background-color: #E7D7C1;
+  
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-element {
+  color: #000000;
+  margin-top: 20px;
+  width: 360px;
+  background: #fff;
+  font: inherit;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+  border: 2px solid #dfdfdf;
+  outline: 0;
+  padding: 22px 18px;
+  transition: border-color 0.5s linear;
+
+  &:focus {
+    border-color: #DFBF84;
+  }
+}
+
+.error {
+  letter-spacing: 0.1em;
+  color: red;
+}
+
+//REGISTER
+.register-container {
+  height: 50%;
+  padding-top: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.form-submit {
+  display: inline-block;
+  border: none;
+  padding: 1rem 3rem;
+  margin: 0;
+  text-decoration: none;
+  background: #0069ed;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  background-color: #C95140;
+  letter-spacing: 0.2em;
+  margin-top: 30px;
+  transition: color 0.1s linear;
+
+  &:hover {
+    color: #DFBF84;
+  }
+}
+
+.register-accept {
+  letter-spacing: 0.1em;
+  color: #2D9A2D;
+}
+
+.auth-image {
+  background-repeat:no-repeat;
+  background-size:contain;
+  height:200px;
+  width:200px;
+  background-image: url("./img/auth.png");
+}

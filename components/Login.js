@@ -4,7 +4,7 @@ import Router from 'next/router';
 
 function LoginError(props) {
     if (props.loginError) {
-        return <h2 className='error'>WRONG CREDENTIALS!</h2>
+        return <h2 className='error'>{props.errorText}</h2>
     } else {
         return (null);
     }
@@ -16,7 +16,8 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            loginError: false
+            loginError: false,
+            errorText: ''
         }
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
@@ -32,21 +33,18 @@ class Login extends Component {
     } 
 
     Authentication() {
-        axios.get(`http://localhost:3001/getusers`).then(res => {
-            const users = res.data;
-            users.forEach(element => {
-                if (this.state.email === element.email && this.state.password === element.password) {
-                    Router.push('/profile');
-                } else {
-                    this.setState({loginError: true});
-                    //fix here because it shouldnt be here, too fast error
-                }
-            }); 
-            this.setState({password: ""});
-        }).catch(error => {
-            console.log(error);
-            this.setState({password: ""});
-        });
+        axios.post(`http://localhost:3001/login`, {
+            email: this.state.email,
+            password: this.state.password
+        }).then(res => {
+            console.log(res.data);
+            if(res.data.login) {
+                console.log(res.data.token);
+                Router.push('/profile');
+            } else {
+                this.setState({loginError: true, errorText: res.data.text});
+            }
+        })
     }
 
 
@@ -58,7 +56,7 @@ class Login extends Component {
                     
                     <form className="form">
                         <h1 className="form-title">SIGN IN</h1>
-                        <LoginError loginError = {this.state.loginError} />
+                        <LoginError loginError = {this.state.loginError} errorText={this.state.errorText}/>
                         <input name="email" type="text" value={this.state.email} className="form-element" placeholder="EMAIL" onChange={this.handleEmail}></input>
                         <input name="password" type="password" value={this.state.password} className="form-element" placeholder="PASSWORD" onChange={this.handlePassword}></input>
                         <a name="submit" className="form-submit login" onClick={this.Authentication}>SUBMIT</a>

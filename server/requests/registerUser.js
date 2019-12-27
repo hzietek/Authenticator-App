@@ -1,36 +1,41 @@
 const db = require('../db');
+const { genSalt, hash } = require('bcryptjs');
+const { registerValidation } = require('../../utils/validation');
 
-const registerUser = (req, res, next) => {
-    const errors = []
 
-    if (!req.body.name) {
-      errors.push('No name specified')
-    }
-    if (!req.body.email) {
-      errors.push('No email specified')
-    }
-    if (!req.body.password) {
-      errors.push('No password specified')
-    }
-    if (errors.length) {
-        res.status(400).json({ error: errors.join(',') })
-        return
-    }
-
+const registerUser = async (req, res, next) => {
+    const { error } = registerValidation(req.body);
+    const salt = await genSalt(10);
+    const hashedPassword = await hash(req.body.password, salt);
     const data = {
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: hashedPassword
     }
-    
     const values = [data.name, data.email, data.password];
-    var sql = "INSERT INTO profiles (name, email, password) VALUES (?, ?, ?)"
-    db.query(sql, values, (error, result) => {
-        if(error) {
-            throw error;
+
+    const emailExistQuery = `SELECT email FROM profiles WHERE email = ?`;
+    const sql = "INSERT INTO profiles (name, email, password) VALUES (?, ?, ?)"
+
+    if(error) return res.status(400).send(error.details[0].message);
+
+    db.query(emailExistQuery, data.email, (error, result) => {
+      if (error) {
+        throw error;
+      } else {
+        if (!result.length) {
+          db.query(sql, values, (error, result) => {
+            if(error) {
+                throw error;
+            }
+            console.log(result);
+            res.send('New user registered!');
+        });
         }
-        console.log(result);
-        res.send('New user registered!');
+        else {
+          res.send('Email, already exists!');
+        }
+      }
     });
 }
 

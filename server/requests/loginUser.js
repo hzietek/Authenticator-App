@@ -16,13 +16,14 @@ const loginUser = async (req, res, next) => {
                 if(err) throw err;
                 if(isMatch) {
                     const token = JWTHandler(data.email);
-                    res.send({
+                    res.header('Authorization', `Bearer ${token}`).send({
                         login: isMatch,
                         token: token
                     });
                 }
                 else {
                     res.send({
+                        text: 'Wrong password or email!',
                         login: isMatch,
                         token: null
                     });

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Router from 'next/router';
+import Cookies from 'js-cookie';
 
 function LoginError(props) {
     if (props.loginError) {
@@ -39,7 +40,7 @@ class Login extends Component {
         }).then(res => {
             console.log(res.data);
             if(res.data.login) {
-                console.log(res.data.token);
+                Cookies.set('Authorization', res.data.token);
                 Router.push('/profile');
             } else {
                 this.setState({loginError: true, errorText: res.data.text});
@@ -53,7 +54,6 @@ class Login extends Component {
         return (
             <div>
                 <div className="form-container">
-                    
                     <form className="form">
                         <h1 className="form-title">SIGN IN</h1>
                         <LoginError loginError = {this.state.loginError} errorText={this.state.errorText}/>

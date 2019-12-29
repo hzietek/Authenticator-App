@@ -6,7 +6,6 @@ const getUser = (req, res, next) => {
         if(error) {
             throw error;
         }
-        console.log(result);
         res.send(result);
     });
 }

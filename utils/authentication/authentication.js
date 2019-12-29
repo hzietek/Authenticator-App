@@ -15,7 +15,6 @@ const authentication = (req, res, next) => {
 
     try {
         const verifiedToken = jwt.verify(token[1], process.env.TOKEN_SECRET);
-        console.log(verifiedToken);
         res.send(verifiedToken);
     } catch(error) {
         res.status(400).send('Invalid Token');

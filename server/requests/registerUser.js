@@ -28,7 +28,6 @@ const registerUser = async (req, res, next) => {
             if(error) {
                 throw error;
             }
-            console.log(result);
             res.send('New user registered!');
         });
         }

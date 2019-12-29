@@ -11,7 +11,6 @@ const loginUser = async (req, res, next) => {
     db.query(sql, data.email, (error, result) => {
         if(error) throw error;
         if(result.length) {
-            console.log(data.password, result[0].password);
             bcrypt.compare(data.password, result[0].password, (err, isMatch) => {
                 if(err) throw err;
                 if(isMatch) {

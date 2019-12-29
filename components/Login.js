@@ -38,7 +38,6 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password
         }).then(res => {
-            console.log(res.data);
             if(res.data.login) {
                 Cookies.set('Authorization', res.data.token);
                 Router.push('/profile');

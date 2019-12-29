@@ -8,7 +8,6 @@ import '../style/login.scss';
 class Index extends Component {
   componentWillMount() {
     const token = Cookies.get('Authorization');
-    console.log(token);
     if(token) Router.push('/profile');
   }
 

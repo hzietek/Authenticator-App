@@ -6,7 +6,6 @@ const createdb = (req, res) => {
         if(error) {
             throw error;
         }
-        console.log(result);
         res.send('New database created!');
     });
 }

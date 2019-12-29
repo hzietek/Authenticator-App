@@ -6,7 +6,6 @@ const createtable = (req, res) => {
         if(error) {
             throw error;
         }
-        console.log(result);
         res.send('New table created!');
     });
 }

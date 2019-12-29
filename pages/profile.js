@@ -3,7 +3,7 @@ import Router from 'next/router'
 import axios from 'axios';
 import nextCookie from 'next-cookies';
 import Cookies from 'js-cookie';
-
+import '../style/login.scss';
 const redirect = res => {
     if(res) {
         res.writeHead(302, {Location: '/index'})
@@ -23,7 +23,7 @@ class Profile extends Component {
         if(!token) redirect(ctx.res);
 
         const response = await axios({
-            method: 'post',
+            method: 'get',
             url: 'http://localhost:3001/authenticate',
             headers: {
                 Authorization: `Bearer ${token}`

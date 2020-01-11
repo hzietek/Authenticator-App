@@ -1,7 +1,6 @@
 const db = require('../db');
 const { genSalt, hash } = require('bcryptjs');
-const { registerValidation } = require('../../utils/validation');
-
+const { registerValidation } = require('../utils/validation');
 
 const registerUser = async (req, res, next) => {
     const { error } = registerValidation(req.body);
@@ -15,7 +14,7 @@ const registerUser = async (req, res, next) => {
     const values = [data.name, data.email, data.password];
 
     const emailExistQuery = `SELECT email FROM profiles WHERE email = ?`;
-    const sql = "INSERT INTO profiles (name, email, password) VALUES (?, ?, ?)"
+    const sql = "INSERT INTO profiles (name, email, password, multifactorAuth) VALUES (?, ?, ?, 0)"
 
     if(error) return res.status(400).send(error.details[0].message);
 

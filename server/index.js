@@ -9,7 +9,9 @@ const createtable = require('./requests/createtable');
 const registeruser = require('./requests/registerUser');
 const getUser = require('./requests/getUser');
 const loginUser = require('./requests/loginUser');
-const authentication = require('../utils/authentication/authentication');
+const authentication = require('./utils/authentication/authentication');
+const changeMultifactor = require('./requests/changeMultifactor');
+const changeDate = require('./requests/changeDate');
 
 const app = express();
 app.use(cors());
@@ -24,3 +26,5 @@ app.get('/getusers', getUser);
 app.get('/authenticate', authentication);
 app.post('/registeruser', registeruser);
 app.post('/login', loginUser);
+app.post('/multifactor', changeMultifactor);
+app.post('/changedate', changeDate);

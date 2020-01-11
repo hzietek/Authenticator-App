@@ -1,20 +1,21 @@
 const db = require('../db');
 const bcrypt = require('bcryptjs');
-const JWTHandler = require('../../utils/authentication/JWTHandler');
+const JWTHandler = require('../utils/authentication/JWTHandler');
 
 const loginUser = async (req, res, next) => {
     const data = {
         email: req.body.email,
         password: req.body.password
     }
-    const sql = `SELECT email, password FROM profiles WHERE email = ?`;
+    const sql = `SELECT name, email, password, lastLoginDate, multifactorAuth FROM profiles WHERE email = ?`;
     db.query(sql, data.email, (error, result) => {
         if(error) throw error;
         if(result.length) {
             bcrypt.compare(data.password, result[0].password, (err, isMatch) => {
                 if(err) throw err;
                 if(isMatch) {
-                    const token = JWTHandler(data.email);
+                    const jsonResult = JSON.parse(JSON.stringify(result));
+                    const token = JWTHandler(jsonResult);
                     res.header('Authorization', `Bearer ${token}`).send({
                         login: isMatch,
                         token: token

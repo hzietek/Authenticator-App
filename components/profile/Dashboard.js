@@ -4,9 +4,12 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Router from 'next/router';
 import Cookies from 'js-cookie';
+import { MultifactorAuth } from './MultifactorAuth';
+import Axios from 'axios';
+import moment from 'moment';
+import { ControlPanel } from './ControlPanel';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -48,33 +51,38 @@ export const Dashboard = (userData) => {
         iat: data.iat
     }
 
-    const logout = () => {
+    const logout = () => { 
+        const date = moment().format('MMMM Do YYYY, h:mm:ss a')
+        Axios.post('http://localhost:3001/changedate', `email=${user.email}&date=${date}`)
         Cookies.remove('Authorization');
         Router.push('/index');
     }
 
     return (
         <div className={classes.root}>
-            <Drawer className={classes.drawer}
-                variant="permanent"
-                classes={{
-                paper: classes.drawerPaper,
-                }}
-                anchor="left">
-                    <div className={classes.avatar}>
-                        <Avatar>
-                            <AccountCircleIcon />
-                        </Avatar>
-                        <Typography>{user.email}</Typography>
-                    </div>
-                    <Divider />
-                    <List>
-                    <ListItem button onClick={logout}>
-                        <ListItemIcon><ExitToAppIcon/></ListItemIcon>
-                        <ListItemText primary="Logout" />
-                    </ListItem>
-                    </List>
-                </Drawer>     
+            <Drawer 
+            className={classes.drawer}
+            variant="permanent"
+            classes={{
+            paper: classes.drawerPaper,
+            }}
+            anchor="left">
+              <div className={classes.avatar}>
+                  <Avatar>
+                      <AccountCircleIcon />
+                  </Avatar>
+                  <Typography>{user.email}</Typography>
+              </div>
+              <Divider />
+              <List>
+                <ListItem button onClick={logout}>
+                    <ListItemIcon><ExitToAppIcon/></ListItemIcon>
+                    <ListItemText primary="Logout" />
+                </ListItem>
+              </List>
+            </Drawer>   
+            <MultifactorAuth data={userData}></MultifactorAuth>
+            <ControlPanel data={userData}></ControlPanel>
         </div>
     )
 }

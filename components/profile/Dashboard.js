@@ -80,9 +80,11 @@ export const Dashboard = (userData) => {
                     <ListItemText primary="Logout" />
                 </ListItem>
               </List>
-            </Drawer>   
-            <MultifactorAuth data={userData}></MultifactorAuth>
-            <ControlPanel data={userData}></ControlPanel>
+            </Drawer>
+            <div className="dashboard-data">
+              <MultifactorAuth data={userData}></MultifactorAuth>
+              <ControlPanel data={userData}></ControlPanel>
+            </div>   
         </div>
     )
 }

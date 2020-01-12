@@ -25,7 +25,7 @@ export const MultifactorAuth = (data) => {
 
     return (
         <div>
-            <Card>
+            <Card color="primary">
                 <CardHeader
                     title="2-Factor Authentication"
                 />

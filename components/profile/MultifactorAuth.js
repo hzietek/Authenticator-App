@@ -33,7 +33,7 @@ export const MultifactorAuth = (data) => {
                 <Typography>You can turn on this option to get additional special code for logging.</Typography>
                 </CardContent>
                 <CardContent style={{display: 'flex', justifyContent:'center'}}>
-                <FormControlLabel control={<Switch checked={toggle.checked} value="toggle" onChange={handleToggle}/>} label={toggle ? "ON" : "OFF"}/>
+                <FormControlLabel control={<Switch checked={toggle.checked} value="toggle" onChange={handleToggle}/>} label={toggle.checked ? "ON" : "OFF"}/>
                 <Button color="primary" variant="contained" onClick={sendData}>SAVE</Button>
                 </CardContent>
             </Card>

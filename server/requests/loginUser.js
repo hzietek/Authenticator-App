@@ -11,7 +11,7 @@ const loginUser = async (req, res, next) => {
         email: req.body.email,
         password: req.body.password
     }
-    const sql = `SELECT name, email, password, lastLoginDate, multifactorAuth, externalLastLoginData FROM profiles WHERE email = ?`;
+    const sql = `SELECT name, email, password, lastLoginData, multifactorAuth, externalLastLoginData FROM profiles WHERE email = ?`;
     db.query(sql, data.email, (error, result) => {
         if(error) throw error;
         if(result.length) {

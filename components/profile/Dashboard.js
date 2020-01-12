@@ -8,7 +8,6 @@ import Router from 'next/router';
 import Cookies from 'js-cookie';
 import { MultifactorAuth } from './MultifactorAuth';
 import Axios from 'axios';
-import moment from 'moment';
 import { ControlPanel } from './ControlPanel';
 
 const useStyles = makeStyles(theme => ({
@@ -52,8 +51,7 @@ export const Dashboard = (userData) => {
     }
 
     const logout = () => { 
-        const date = moment().format('MMMM Do YYYY, h:mm:ss a')
-        Axios.post('http://localhost:3001/changedate', `email=${user.email}&date=${date}`)
+        Axios.post('http://localhost:3001/changedate', `email=${user.email}`)
         Cookies.remove('Authorization');
         Router.push('/index');
     }

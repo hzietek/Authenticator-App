@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const JWTHandler = require('../utils/authentication/JWTHandler');
 const moment = require('moment');
 const externalLogin = require('./externalLogin');
+const generateCode = require('./generateCode');
 
 const loginUser = async (req, res, next) => {
     const forwarded = req.headers['x-forwarded-for'];
@@ -29,10 +30,14 @@ const loginUser = async (req, res, next) => {
                     if(loginData.applicationType !== "INTERNAL") externalLogin(loginDataSQL, data.email, res);
                     const jsonResult = JSON.parse(JSON.stringify(result));
                     const token = JWTHandler(jsonResult);
-                    res.header('Authorization', `Bearer ${token}`).send({
+                    !jsonResult[0].multifactorAuth ? res.header('Authorization', `Bearer ${token}`).send({
                         login: isMatch,
-                        token: token
-                    });
+                        token: token,
+                    }) : res.send({
+                        login: isMatch,
+                        code: jsonResult[0].multifactorAuth,
+                        secret: generateCode() 
+                    })
                 }
                 else {
                     res.send({

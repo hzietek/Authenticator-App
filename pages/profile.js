@@ -48,9 +48,6 @@ class Profile extends Component {
         return (
             <div>
                 <Dashboard data={this.props.data}></Dashboard>
-                <style jsx>
-                    {`hi`}
-                </style>
             </div>
         )
     }

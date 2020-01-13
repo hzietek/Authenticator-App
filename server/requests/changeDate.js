@@ -1,5 +1,6 @@
 const db = require('../db');
 const moment = require('moment');
+
 const changeDate = (req,res) => {
     const forwarded = req.headers['x-forwarded-for'];
     const loginData = {
@@ -14,7 +15,7 @@ const changeDate = (req,res) => {
         if(error) {
             throw error;
         }
-        res.send("Last login date updated!");
+        res.send("Last login data updated!");
     })
 }
 

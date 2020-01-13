@@ -12,6 +12,8 @@ const loginUser = require('./requests/loginUser');
 const authentication = require('./utils/authentication/authentication');
 const changeMultifactor = require('./requests/changeMultifactor');
 const changeDate = require('./requests/changeDate');
+const generateCode = require('./requests/generateCode');
+const codeAuthentication = require('./requests/codeAuthentication');
 
 const app = express();
 app.use(cors());
@@ -24,7 +26,9 @@ app.get('/createdb', createdb);
 app.get('/createtable', createtable);
 app.get('/getusers', getUser);
 app.get('/authenticate', authentication);
+app.get('/generatecode', generateCode);
 app.post('/registeruser', registeruser);
 app.post('/login', loginUser);
 app.post('/multifactor', changeMultifactor);
 app.post('/changedate', changeDate);
+app.post('/codeauth', codeAuthentication);

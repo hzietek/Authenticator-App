@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const JWTHandler = require('../utils/authentication/JWTHandler');
 const moment = require('moment');
 const externalLogin = require('./externalLogin');
-const generateCode = require('./generateCode');
+const generateCode = require('../utils/mail/generateCode');
 
 const loginUser = async (req, res, next) => {
     const forwarded = req.headers['x-forwarded-for'];
@@ -36,7 +36,7 @@ const loginUser = async (req, res, next) => {
                     }) : res.send({
                         login: isMatch,
                         code: jsonResult[0].multifactorAuth,
-                        secret: generateCode() 
+                        secret: generateCode(data.email) 
                     })
                 }
                 else {

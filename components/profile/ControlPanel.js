@@ -26,11 +26,11 @@ export const ControlPanel = (data) => {
                 </CardContent>
                 <Divider />
                 <CardContent>
-                        <Typography variant="subtitle2"><b> Application: </b> {externalLastLogin.applicationType} </Typography>
-                        <Typography variant="subtitle2"><b> Name: </b> {externalLastLogin.applicationName} </Typography>
-                        <Typography variant="subtitle2"><b> Last login date: </b>{externalLastLogin.date}</Typography>
-                        <Typography variant="subtitle2"><b> Last login IP: </b>{externalLastLogin.ip}</Typography>
-                        <Typography variant="subtitle2"><b> User-Agent: </b> {externalLastLogin.userAgent} </Typography> 
+                    <Typography variant="subtitle2"><b> Application: </b> {externalLastLogin.applicationType} </Typography>
+                    <Typography variant="subtitle2"><b> Name: </b> {externalLastLogin.applicationName} </Typography>
+                    <Typography variant="subtitle2"><b> Last login date: </b>{externalLastLogin.date}</Typography>
+                    <Typography variant="subtitle2"><b> Last login IP: </b>{externalLastLogin.ip}</Typography>
+                    <Typography variant="subtitle2"><b> User-Agent: </b> {externalLastLogin.userAgent} </Typography> 
                 </CardContent>
             </Card>
         </div>

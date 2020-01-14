@@ -81,12 +81,12 @@ class Login extends Component {
                 <div className="form-container">
                     <form className="form">
                         <h1 className="form-title">SIGN IN</h1>
+                        {this.state.addAuth ? <h4 className='register-accept' style={{ color: '#000000' }}>ADDITIONAL CODE HAS BEEN SENT TO YOUR EMAIL. ENTER IT BELOW.</h4> : null}
                         <LoginError loginError = {this.state.loginError} errorText={this.state.errorText}/>
                         <input name="email" type="text" value={this.state.email} className="form-element" placeholder="EMAIL" onChange={this.handleEmail}></input>
                         <input name="password" type="password" value={this.state.password} className="form-element" placeholder="PASSWORD" onChange={this.handlePassword}></input>
-                        {this.state.addAuth ? <div><input name="2-factor-auth" className="form-element" type="text" value={this.state.code} onChange={this.handleCode}></input>
-                        <a name="submit" className="form-submit login" onClick={this.CodeAuthentication}>ACCEPT CODE</a></div> : null}
-                        <a name="submit" className="form-submit login" onClick={this.Authentication}>SUBMIT</a>
+                        {this.state.addAuth ? <input placeholder="CODE" name="2-factor-auth" className="form-element" type="text" value={this.state.code} onChange={this.handleCode}></input> : null}
+                        {this.state.addAuth ? <a name="submit" className="form-submit login" onClick={this.CodeAuthentication}>ACCEPT CODE</a> : <a name="submit" className="form-submit login" onClick={this.Authentication}>SUBMIT</a>}
                     </form>
                 </div>
             </div>

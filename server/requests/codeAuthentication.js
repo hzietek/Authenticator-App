@@ -1,5 +1,6 @@
 const db = require('../db');
 const Speakeasy = require('speakeasy');
+
 const codeAuthentication = (req, res) => {
 const JWTHandler = require('../utils/authentication/JWTHandler');
     const data = {
@@ -10,9 +11,10 @@ const JWTHandler = require('../utils/authentication/JWTHandler');
     const verify = Speakeasy.totp.verify({
         secret: data.secret,
         encoding: 'base32',
-        token: data.code
+        token: data.code,
+        window: 2
     });
-    console.log(data, verify);
+
     const sql = `SELECT name, email, password, lastLoginData, multifactorAuth, externalLastLoginData FROM profiles WHERE email = ?`;
     if(verify) {
         db.query(sql, data.email, (error, result) => {

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Router from 'next/router'
+import { Dashboard } from '../components/profile/Dashboard';
 import axios from 'axios';
 import nextCookie from 'next-cookies';
-import Cookies from 'js-cookie';
 import '../style/login.scss';
+
 const redirect = res => {
     if(res) {
         res.writeHead(302, {Location: '/index'})
@@ -41,23 +42,12 @@ class Profile extends Component {
         this.state = {
             email: this.props.data._id
         }
-
-        this.logout = this.logout.bind(this);
-    }
-
-    logout() {
-        Cookies.remove('Authorization');
-        Router.push('/index');
     }
 
     render() {
         return (
             <div>
-                <h1>You logged in {this.state.email}!</h1>
-                <a name="submit" className="form-submit" onClick={this.logout}>LOGOUT</a>
-                <style jsx>
-                    {`hi`}
-                </style>
+                <Dashboard data={this.props.data}></Dashboard>
             </div>
         )
     }

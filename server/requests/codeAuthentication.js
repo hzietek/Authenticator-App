@@ -15,7 +15,7 @@ const JWTHandler = require('../utils/authentication/JWTHandler');
         window: 2
     });
 
-    const sql = `SELECT name, email, password, lastLoginData, multifactorAuth, externalLastLoginData FROM profiles WHERE email = ?`;
+    const sql = `SELECT name, email, lastLoginData, multifactorAuth, externalLastLoginData FROM profiles WHERE email = ?`;
     if(verify) {
         db.query(sql, data.email, (error, result) => {
             if(error) throw error;

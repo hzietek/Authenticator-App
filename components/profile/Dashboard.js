@@ -50,8 +50,17 @@ export const Dashboard = (userData) => {
         iat: data.iat
     }
 
-    const logout = () => { 
-        Axios.post('http://localhost:3001/changedate', `email=${user.email}`)
+    const logout = () => {
+        Axios({
+          method: 'post',
+          url: 'http://localhost:3001/changedate',
+          data: {
+            email: user.email
+          },
+          headers: {
+            Access: process.env.secretKey
+          }
+        });
         Cookies.remove('Authorization');
         Router.push('/index');
     }

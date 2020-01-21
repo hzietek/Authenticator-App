@@ -12,6 +12,7 @@ const authentication = require('./utils/authentication/authentication');
 const changeMultifactor = require('./requests/changeMultifactor');
 const changeDate = require('./requests/changeDate');
 const codeAuthentication = require('./requests/codeAuthentication');
+const serverApprover = require('./utils/serverApprover');
 
 const app = express();
 app.use(cors());
@@ -20,11 +21,11 @@ app.use(bodyParser.json());
 
 app.listen(port, () => console.log(`Authentication Server is set on http://localhost:${port}`));
 
-app.get('/createdb', createdb);
-app.get('/createtable', createtable);
+app.get('/createdb', serverApprover, createdb);
+app.get('/createtable', serverApprover, createtable);
 app.get('/authenticate', authentication);
 app.post('/registeruser', registeruser);
 app.post('/login', loginUser);
-app.post('/multifactor', changeMultifactor);
-app.post('/changedate', changeDate);
+app.post('/multifactor', serverApprover, changeMultifactor);
+app.post('/changedate', serverApprover, changeDate);
 app.post('/codeauth', codeAuthentication);

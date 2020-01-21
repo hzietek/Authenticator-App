@@ -48,12 +48,10 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password
         }).then(res => {
-            console.log(res.data);
             if(res.data.login && !res.data.code) {
                 Cookies.set('Authorization', res.data.token);
                 Router.push('/profile');
             } else if (res.data.login && res.data.code) {
-                console.log(res.data);
                 this.setState({addAuth: true, secret: res.data.secret});
             } else {
                 this.setState({loginError: true, errorText: res.data.text});
@@ -62,16 +60,14 @@ class Login extends Component {
     }
 
     CodeAuthentication() {
-        if(this.code === this.secret) {
-            axios.post(`http://localhost:3001/codeauth`, {
-                email: this.state.email,
-                code: this.state.code,
-                secret: this.state.secret
-            }).then(res => {
-                Cookies.set('Authorization', res.data.token);
-                Router.push('/profile');
-            }).catch(err => console.log(err));
-        }
+        axios.post(`http://localhost:3001/codeauth`, {
+            email: this.state.email,
+            code: this.state.code,
+            secret: this.state.secret
+        }).then(res => {
+            Cookies.set('Authorization', res.data.token);
+            Router.push('/profile');
+        }).catch(err => console.log(err));
     }
 
 

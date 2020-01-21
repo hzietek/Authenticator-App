@@ -34,6 +34,7 @@
     "nodemailer": "^6.4.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-scripts": "^3.3.0",
     "speakeasy": "^2.0.0",
     "url-loader": "^2.2.0"
   },

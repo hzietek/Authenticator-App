@@ -20,7 +20,17 @@ export const MultifactorAuth = (data) => {
 
     const sendData = () => {
         let multifactorData = toggle.checked ? 1 : 0;
-        axios.post('http://localhost:3001/multifactor', `email=${data.data.data._id}&multifactor=${multifactorData}`);
+        axios({
+            method: 'post',
+            url: 'http://localhost:3001/multifactor',
+            data: {
+                email: data.data.data._id,
+                multifactor: multifactorData
+            },
+            headers: {
+                Access: process.env.secretKey
+            }
+        })
     }
 
     return (
